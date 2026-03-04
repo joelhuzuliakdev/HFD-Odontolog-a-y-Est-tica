@@ -6,7 +6,9 @@ import Layout from '../layouts/Layout.astro';
 
 	<!-- ═══════════════ NAV ═══════════════ -->
 	<nav id="navbar">
-		<a href="#inicio" class="nav-logo">HFD<span>·</span></a>
+		<a href="#inicio" class="nav-logo">
+			<img src="/logoNuevo.webp" alt="HFD Logo" style="height: 60px; width: auto; display: block;" />
+		</a>
 		<ul class="nav-links">
 			<li><a href="#odontologia">Odontología</a></li>
 			<li><a href="#estetica">Estética Facial</a></li>
@@ -216,7 +218,7 @@ import Layout from '../layouts/Layout.astro';
 
 				<div class="ayd-card reveal reveal-delay-2">
 					<div class="ayd-img-wrap">
-						<img src="https://placehold.co/800x500/2C2C2C/A8C4B8?font=playfair-display&text=Antes+|+Después" alt="Antes y después cirugía láser" />
+						<img src="/odontologia/antesYDespuesOdontologiaCinco.webp" alt="Antes y después cirugía láser" />
 						<span class="ayd-card-tag ayd-card-tag-dental">Cirugía Láser</span>
 					</div>
 				</div>
@@ -330,7 +332,7 @@ import Layout from '../layouts/Layout.astro';
 
 				<div class="ayd-card reveal reveal-delay-1">
 					<div class="ayd-img-wrap">
-						<img src="https://placehold.co/800x500/1E1E1E/C9A96E?font=playfair-display&text=Antes+|+Después" alt="Antes y después PRP" />
+						<img src="/facial/antesYDespuesFacialCinco.webp" alt="Antes y después PRP" />
 						<span class="ayd-card-tag">PRP — Plasma Rico en Plaquetas</span>
 					</div>
 				</div>
@@ -618,7 +620,9 @@ import Layout from '../layouts/Layout.astro';
 		<div class="footer-inner">
 			<div class="footer-top">
 				<div class="footer-brand">
-					<a href="#inicio" class="nav-logo" style="color:var(--ivory);font-size:1.6rem;">HFD<span style="color:var(--gold)">·</span></a>
+					<a href="#inicio" class="nav-logo" style="color:var(--ivory);">
+						<img src="/logoNuevo.webp" alt="Logo HFD" style="height: 60px; width: auto; display: block;">
+					</a>
 					<p style="margin-top:0.5rem;font-size:0.8rem;color:rgba(247,244,239,0.4);letter-spacing:0.06em;text-transform:uppercase;">Odontología Láser & Estética Facial</p>
 					<p style="margin-top:0.8rem;font-size:0.85rem;line-height:1.7;max-width:280px;color:rgba(247,244,239,0.55);">Tecnología láser al servicio de tu sonrisa y tu rostro. Córdoba, Argentina.</p>
 					<div class="footer-socials">
@@ -744,6 +748,12 @@ import Layout from '../layouts/Layout.astro';
 		letter-spacing: 0.08em;
 		color: var(--charcoal);
 	}
+	.nav-logo img {
+    height: 56px;
+    width: auto;
+    /* Si el logo tiene fondo blanco y no se distingue: */
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.15));
+}
 	.nav-logo span { color: var(--gold); }
 	.nav-links {
 		display: flex;
