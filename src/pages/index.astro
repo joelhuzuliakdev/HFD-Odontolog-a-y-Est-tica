@@ -1644,7 +1644,7 @@ import Layout from '../layouts/Layout.astro';
 	}
 	.ayd-cta-card p { font-size: 0.85rem; color: rgba(247,244,239,0.55); line-height: 1.65; }
 
-	/* Variante dental del antes/después */
+	/* ─── ANTES & DESPUÉS DENTAL ─── */
 	#antes-despues-dental { background: var(--ivory); }
 	#antes-despues-dental .section-title { color: var(--charcoal); }
 	#antes-despues-dental .section-title em { color: var(--sage); }
@@ -1659,20 +1659,6 @@ import Layout from '../layouts/Layout.astro';
 	}
 	.ayd-cta-card-dental h3 { color: var(--charcoal); }
 	.ayd-cta-card-dental p { color: var(--warm-gray); }
-
-	@media (max-width: 1024px) {
-		.ayd-grid { grid-template-columns: repeat(2, 1fr); }
-		.nav-logo img {
-			height: 48px;  /* un poco más chico en mobile */
-		}
-		
-		.hero-left { 
-			padding: 9rem 2rem 3rem;
-		}
-	}
-	@media (max-width: 600px) {
-		.ayd-grid { grid-template-columns: 1fr; }
-	}
 
 	/* ─── MOBILE MENU ─── */
 	.mobile-menu {
@@ -1707,7 +1693,11 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--ivory);
 	}
 
-	/* ─── RESPONSIVE TABLET ─── */
+	/* ═══════════════════════════════════════
+	RESPONSIVE — UN SOLO BLOQUE POR BREAKPOINT
+	═══════════════════════════════════════ */
+
+	/* ─── TABLET (≤ 1024px) ─── */
 	@media (max-width: 1024px) {
 		html, body { overflow-x: hidden; }
 		.reveal.from-left, .reveal.from-right { transform: translateY(40px); }
@@ -1716,22 +1706,26 @@ import Layout from '../layouts/Layout.astro';
 		nav { padding: 1.25rem 2rem; }
 		nav.scrolled { padding: 0.9rem 2rem; }
 		.nav-links { display: none; }
+		.nav-logo img { height: 48px; }
 		.hamburger { display: flex; }
 
 		.hero-content { grid-template-columns: 1fr; position: relative; }
-		.hero-right {
-			position: absolute;
-			inset: 0;
-			z-index: 0;
-		}
+		.hero-right { position: absolute; inset: 0; z-index: 0; }
 		.hero-image-wrap::after {
 			background: linear-gradient(to right, rgba(247,244,239,0.96) 0%, rgba(247,244,239,0.75) 60%, rgba(247,244,239,0.3) 100%);
 		}
-		.hero-left { position: relative; z-index: 1; min-height: 100vh; padding: 6rem 2rem 3rem; }
+		/* ✅ padding-top generoso para que el badge no quede bajo el nav */
+		.hero-left {
+			position: relative;
+			z-index: 1;
+			min-height: 100vh;
+			padding: 9rem 2rem 3rem;
+		}
 		.hero-card { display: none; }
 
 		.services-grid { grid-template-columns: repeat(2, 1fr); }
 		.estetica-grid { grid-template-columns: repeat(2, 1fr); }
+		.ayd-grid { grid-template-columns: repeat(2, 1fr); }
 		#nosotros .section-inner { grid-template-columns: 1fr; gap: 3rem; }
 		.about-images { height: 360px; }
 		#contacto .section-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -1743,16 +1737,20 @@ import Layout from '../layouts/Layout.astro';
 		.dual-banner { gap: 1.5rem; flex-wrap: wrap; }
 	}
 
-	/* ─── RESPONSIVE MOBILE ─── */
+	/* ─── MOBILE (≤ 600px) ─── */
 	@media (max-width: 600px) {
 		.section-inner { padding: 4rem 1.5rem; }
 		.hero-h1 { font-size: 2.3rem; }
+		/* ✅ padding-top extra para pantallas muy chicas */
+		.hero-left { padding: 10rem 1.5rem 3rem; }
 		.hero-image-wrap::after {
 			background: linear-gradient(to bottom, rgba(247,244,239,0.95) 0%, rgba(247,244,239,0.7) 100%);
 		}
 		.hero-stats { gap: 1rem; }
+		.nav-logo img { height: 44px; }
 		.services-grid { grid-template-columns: 1fr; }
 		.estetica-grid { grid-template-columns: 1fr; }
+		.ayd-grid { grid-template-columns: 1fr; }
 		.gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
 		.gallery-item { height: 220px; }
 		.gallery-item:first-child, .gallery-item:nth-child(4) { grid-column: auto; grid-row: auto; }
