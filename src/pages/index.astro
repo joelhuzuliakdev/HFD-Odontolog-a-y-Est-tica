@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 	<!-- ═══════════════ NAV ═══════════════ -->
 	<nav id="navbar">
 		<a href="#inicio" class="nav-logo">
-			<img src="/logoNuevo.webp" alt="HFD Logo" style="height: 60px; width: auto; display: block;" />
+			<img src="/logoNuevoSinFondo.webp" alt="HFD Logo" style="height: 100px; width: auto; display: block;" />
 		</a>
 		<ul class="nav-links">
 			<li><a href="#odontologia">Odontología</a></li>
@@ -621,7 +621,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="footer-top">
 				<div class="footer-brand">
 					<a href="#inicio" class="nav-logo" style="color:var(--ivory);">
-						<img src="/logoNuevo.webp" alt="Logo HFD" style="height: 60px; width: auto; display: block;">
+						<img src="/logoNuevo.webp" alt="Logo HFD" style="height: 100px; width: auto; display: block;">
 					</a>
 					<p style="margin-top:0.5rem;font-size:0.8rem;color:rgba(247,244,239,0.4);letter-spacing:0.06em;text-transform:uppercase;">Odontología Láser & Estética Facial</p>
 					<p style="margin-top:0.8rem;font-size:0.85rem;line-height:1.7;max-width:280px;color:rgba(247,244,239,0.55);">Tecnología láser al servicio de tu sonrisa y tu rostro. Córdoba, Argentina.</p>
@@ -749,11 +749,10 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--charcoal);
 	}
 	.nav-logo img {
-    height: 56px;
-    width: auto;
-    /* Si el logo tiene fondo blanco y no se distingue: */
-    filter: drop-shadow(0 0 4px rgba(0,0,0,0.15));
-}
+		height: 44px;
+		width: auto;
+		filter: drop-shadow(0 0 4px rgba(0,0,0,0.15));
+	}
 	.nav-logo span { color: var(--gold); }
 	.nav-links {
 		display: flex;
@@ -817,7 +816,7 @@ import Layout from '../layouts/Layout.astro';
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: 7rem 4rem 4rem 4rem;
+		padding: 9rem 4rem 4rem 4rem;
 	}
 	.hero-badge {
 		display: inline-flex;
@@ -1663,6 +1662,9 @@ import Layout from '../layouts/Layout.astro';
 
 	@media (max-width: 1024px) {
 		.ayd-grid { grid-template-columns: repeat(2, 1fr); }
+		.hero-left { 
+			padding: 7rem 2rem 3rem;
+		}
 	}
 	@media (max-width: 600px) {
 		.ayd-grid { grid-template-columns: 1fr; }
@@ -1763,71 +1765,120 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		// Navbar scroll
-		const nav = document.getElementById('navbar');
-		window.addEventListener('scroll', () => {
+declare global {
+	interface Window {
+		handleSubmit: (btn: HTMLButtonElement) => void;
+	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+	// Navbar scroll
+	const nav = document.getElementById('navbar') as HTMLElement | null;
+
+	window.addEventListener('scroll', () => {
+		if (nav) {
 			nav.classList.toggle('scrolled', window.scrollY > 40);
-		});
+		}
+	});
 
-		// Mobile menu
-		const hamburger = document.getElementById('hamburger');
-		const mobileMenu = document.getElementById('mobileMenu');
-		const menuClose  = document.getElementById('menuClose');
+	// Mobile menu
+	const hamburger = document.getElementById('hamburger') as HTMLElement | null;
+	const mobileMenu = document.getElementById('mobileMenu') as HTMLElement | null;
+	const menuClose = document.getElementById('menuClose') as HTMLElement | null;
+
+	if (hamburger && mobileMenu) {
 		hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+	}
+
+	if (menuClose && mobileMenu) {
 		menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-		document.querySelectorAll('.mobile-nav-link').forEach(link => {
-			link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-		});
+	}
 
-		// Scroll reveal
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('visible');
-					if (entry.target.classList.contains('rating-bars')) {
-						setTimeout(() => {
-							document.querySelectorAll('.rating-bar-fill').forEach(bar => {
-								bar.style.width = bar.dataset.width + '%';
-							});
-						}, 300);
-					}
-				}
-			});
-		}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-		document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-		const ratingsEl = document.querySelector('.rating-bars');
-		if (ratingsEl) observer.observe(ratingsEl);
-
-		// Hero reveals immediately
-		setTimeout(() => {
-			document.querySelectorAll('#inicio .reveal').forEach(el => el.classList.add('visible'));
-		}, 100);
-
-		// Parallax hero (desktop only)
-		window.addEventListener('scroll', () => {
-			if (window.innerWidth > 1024) {
-				const heroImg = document.querySelector('.hero-img');
-				if (heroImg) heroImg.style.transform = `translateY(${window.scrollY * 0.2}px)`;
-			}
+	document.querySelectorAll('.mobile-nav-link').forEach(link => {
+		link.addEventListener('click', () => {
+			if (mobileMenu) mobileMenu.classList.remove('open');
 		});
 	});
 
-	// FOOTER
+	// Scroll reveal
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
 
-	document.getElementById('footer-year').textContent = new Date().getFullYear();
+			const target = entry.target as HTMLElement;
 
-	window.handleSubmit = function(btn) {
-		const span = btn.querySelector('span');
-		span.textContent = '✓ Enviado con éxito';
-		btn.style.background = '#5A7D6D';
-		btn.disabled = true;
-		setTimeout(() => {
-			span.textContent = 'Enviar Solicitud';
-			btn.style.background = '';
-			btn.disabled = false;
-		}, 3000);
-	}
+			if (entry.isIntersecting) {
+
+				target.classList.add('visible');
+
+				if (target.classList.contains('rating-bars')) {
+
+					setTimeout(() => {
+
+						document.querySelectorAll('.rating-bar-fill').forEach(bar => {
+
+							const el = bar as HTMLElement;
+							el.style.width = (el.dataset.width || '0') + '%';
+
+						});
+
+					}, 300);
+
+				}
+			}
+		});
+	}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+	document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+	const ratingsEl = document.querySelector('.rating-bars');
+	if (ratingsEl) observer.observe(ratingsEl);
+
+	// Hero reveals immediately
+	setTimeout(() => {
+		document.querySelectorAll('#inicio .reveal').forEach(el => {
+			(el as HTMLElement).classList.add('visible');
+		});
+	}, 100);
+
+	// Parallax hero
+	window.addEventListener('scroll', () => {
+
+		if (window.innerWidth > 1024) {
+
+			const heroImg = document.querySelector('.hero-img') as HTMLElement | null;
+
+			if (heroImg) {
+				heroImg.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+			}
+
+		}
+
+	});
+});
+
+// FOOTER
+const year = document.getElementById('footer-year');
+if (year) {
+	year.textContent = new Date().getFullYear().toString();
+}
+
+// FORM
+window.handleSubmit = function(btn: HTMLButtonElement) {
+
+	const span = btn.querySelector('span');
+
+	if (!span) return;
+
+	span.textContent = '✓ Enviado con éxito';
+	btn.style.background = '#5A7D6D';
+	btn.disabled = true;
+
+	setTimeout(() => {
+		span.textContent = 'Enviar Solicitud';
+		btn.style.background = '';
+		btn.disabled = false;
+	}, 3000);
+
+}
 </script>
