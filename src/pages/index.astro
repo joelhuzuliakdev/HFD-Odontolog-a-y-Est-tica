@@ -1662,8 +1662,12 @@ import Layout from '../layouts/Layout.astro';
 
 	@media (max-width: 1024px) {
 		.ayd-grid { grid-template-columns: repeat(2, 1fr); }
+		.nav-logo img {
+			height: 48px;  /* un poco más chico en mobile */
+		}
+		
 		.hero-left { 
-			padding: 7rem 2rem 3rem;
+			padding: 9rem 2rem 3rem;
 		}
 	}
 	@media (max-width: 600px) {
